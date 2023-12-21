@@ -1,10 +1,18 @@
 package com.tpe.hotelmanagementsystem.main;
 
+import com.tpe.hotelmanagementsystem.repository.HotelImplementations;
+import com.tpe.hotelmanagementsystem.repository.HotelRepository;
+import com.tpe.hotelmanagementsystem.service.HotelService;
+import com.tpe.hotelmanagementsystem.service.HotelServiceImplementations;
+
 import java.util.Scanner;
 
 
 public class HotelManagementSystemServiceClass {
     private static Scanner scanner;
+
+   static HotelImplementations hotelRepository = new HotelRepository();
+   static HotelServiceImplementations hotelService = new HotelService(hotelRepository);
 
     public static void displayHotelManagementSystemMenu(){
         boolean exit = false;
@@ -24,7 +32,7 @@ public class HotelManagementSystemServiceClass {
 
             switch (choice) {
                 case 1:
-                    displayHotelOperations();
+                    displayHotelOperations(hotelService);
                     break;
 
                 case 2:
@@ -49,7 +57,7 @@ public class HotelManagementSystemServiceClass {
     }
 
 
-    private static void displayHotelOperations(){
+    private static void displayHotelOperations(HotelServiceImplementations hotelService){
         boolean exit = false;
         scanner = new Scanner(System.in);
         while(!exit)
@@ -67,11 +75,13 @@ public class HotelManagementSystemServiceClass {
 
             switch (choice) {
                 case 1:
-
+                    hotelService.createHotel();
                     break;
 
                 case 2:
-
+                    System.out.println("Enter Hotel id: ");
+                Long Hotelid = scanner.nextLong();
+                hotelService.findHotelById(Hotelid);
                     break;
                 case 3:
 

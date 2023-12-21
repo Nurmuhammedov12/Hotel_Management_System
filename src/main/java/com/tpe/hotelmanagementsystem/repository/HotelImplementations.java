@@ -4,4 +4,5 @@ import com.tpe.hotelmanagementsystem.model.Hotel;
 
 public interface HotelImplementations {
    Hotel createHotel(Hotel hotel);
+   Hotel findHotelById(Long id);
 }
