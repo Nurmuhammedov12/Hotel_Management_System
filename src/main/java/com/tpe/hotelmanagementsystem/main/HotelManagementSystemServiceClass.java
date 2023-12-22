@@ -2,14 +2,8 @@ package com.tpe.hotelmanagementsystem.main;
 
 import com.tpe.hotelmanagementsystem.exception.HotelNotFoundException;
 import com.tpe.hotelmanagementsystem.model.Hotel;
-import com.tpe.hotelmanagementsystem.repository.HotelImplementations;
-import com.tpe.hotelmanagementsystem.repository.HotelRepository;
-import com.tpe.hotelmanagementsystem.repository.RoomRepository;
-import com.tpe.hotelmanagementsystem.repository.RoomRepositoryImpl;
-import com.tpe.hotelmanagementsystem.service.HotelService;
-import com.tpe.hotelmanagementsystem.service.HotelServiceImplementations;
-import com.tpe.hotelmanagementsystem.service.RoomService;
-import com.tpe.hotelmanagementsystem.service.RoomServiceImpl;
+import com.tpe.hotelmanagementsystem.repository.*;
+import com.tpe.hotelmanagementsystem.service.*;
 
 import java.util.Scanner;
 
@@ -23,6 +17,8 @@ public class HotelManagementSystemServiceClass {
    static RoomRepository roomRepository = new RoomRepositoryImpl();
    static RoomService  roomService = new RoomServiceImpl(roomRepository, hotelRepository);
 
+   static GuestRepository  guestRepository = new GuestImpl();
+   static GuestService guestService = new GuestServiceImpl(guestRepository);
     public static void displayHotelManagementSystemMenu(){
         boolean exit = false;
         scanner = new Scanner(System.in);
@@ -48,7 +44,7 @@ public class HotelManagementSystemServiceClass {
                     displayRoomOperations(roomService);
                     break;
                 case 3:
-                    displayGuestsOperations();
+                    displayGuestsOperations(guestService);
                     break;
                 case 4:
                     displayReservationOperations();
@@ -177,7 +173,7 @@ public class HotelManagementSystemServiceClass {
         }
 
     }
-    private static void displayGuestsOperations(){
+    private static void displayGuestsOperations(GuestService guestService){
         boolean exit = false;
         scanner = new Scanner(System.in);
         while(!exit)
@@ -195,7 +191,7 @@ public class HotelManagementSystemServiceClass {
 
             switch (choice) {
                 case 1:
-
+                    guestService.saveGuest();
                     break;
 
                 case 2:

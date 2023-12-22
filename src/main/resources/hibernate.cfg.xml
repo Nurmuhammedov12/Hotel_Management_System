@@ -38,10 +38,10 @@
 
         <property name="format_sql">true</property>
 
-        <mapping class="com.tpe.hotelmanagementsystem.model.Guest"></mapping>
         <mapping class="com.tpe.hotelmanagementsystem.model.Hotel"></mapping>
-        <mapping class="com.tpe.hotelmanagementsystem.model.Reservation"></mapping>
+        <mapping class="com.tpe.hotelmanagementsystem.model.Guest"></mapping>
         <mapping class="com.tpe.hotelmanagementsystem.model.Room"></mapping>
+        <mapping class="com.tpe.hotelmanagementsystem.model.Reservation"></mapping>
 
     </session-factory>
 
