@@ -5,6 +5,7 @@ import com.tpe.hotelmanagementsystem.model.Hotel;
 import com.tpe.hotelmanagementsystem.repository.HotelImplementations;
 import org.hibernate.Session;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class HotelService implements HotelServiceImplementations{
@@ -54,5 +55,28 @@ public class HotelService implements HotelServiceImplementations{
             return null;
         }
 
+    }
+
+    @Override
+    public void deleteHotel(Long id) {
+        scanner = new Scanner(System.in);
+            Hotel hotelidToDelete = hotelrepository.findHotelById(id);
+            if (hotelidToDelete == null){
+                throw  new HotelNotFoundException("Hotel Id Not Found");
+            }
+            System.out.println("Do you really want to delete this hotel: " + hotelidToDelete.getId() + " Y/N");
+            String confirmation = scanner.nextLine();
+            if (confirmation.equalsIgnoreCase("Y")){
+                hotelrepository.deleteHotel(id);
+                System.out.println("Hotel deleted");
+            }else {
+                System.out.println("Canceled");
+            }
+
+    }
+
+    @Override
+    public List<Hotel> finAllHotel() {
+        return null;
     }
 }

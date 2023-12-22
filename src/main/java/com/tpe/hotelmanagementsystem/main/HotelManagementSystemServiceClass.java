@@ -87,7 +87,9 @@ public class HotelManagementSystemServiceClass {
 
                     break;
                 case 4:
-
+                    System.out.println("Enter hotel id which u want Delete: ");
+                    Long hotelid = scanner.nextLong();
+                    hotelService.deleteHotel(hotelid);
                     break;
                 case 5:
                     break;
