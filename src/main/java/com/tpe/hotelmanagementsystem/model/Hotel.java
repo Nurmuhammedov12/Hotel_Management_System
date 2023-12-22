@@ -1,9 +1,8 @@
 package com.tpe.hotelmanagementsystem.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tbl_hotels")
@@ -14,6 +13,8 @@ public class Hotel {
     private String name;
     @Column(nullable = false)
     private String location;
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Room> rooms = new ArrayList<>();
 
     public Hotel() {
     }
@@ -46,6 +47,14 @@ public class Hotel {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
     }
 
     @Override

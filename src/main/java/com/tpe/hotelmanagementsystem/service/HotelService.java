@@ -77,6 +77,35 @@ public class HotelService implements HotelServiceImplementations{
 
     @Override
     public List<Hotel> finAllHotel() {
-        return null;
+       try{
+           List<Hotel> hotels =  hotelrepository.finAllHotel();
+           if(!hotels.isEmpty()){
+               for (Hotel hotel:hotels){
+                   System.out.println(hotel);
+               }
+           }else System.out.println("Hotel List is empty :(");
+           return hotels;
+       }catch (Exception e){
+           System.out.println("Error in Hotel List");
+           return null;
+       }
     }
+
+    @Override
+    public void updateHotel(Long id, Hotel updatehotel) {
+        try {
+            Hotel existHotel = hotelrepository.findHotelById(id);
+            if (existHotel == null){
+                throw new HotelNotFoundException("Hotel id fatal");
+            }
+
+            existHotel.setName(updatehotel.getName());
+            existHotel.setLocation(updatehotel.getLocation());
+           hotelrepository.updateHotel(existHotel);
+        }catch (HotelNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+
 }

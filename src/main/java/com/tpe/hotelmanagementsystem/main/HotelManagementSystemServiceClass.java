@@ -1,5 +1,7 @@
 package com.tpe.hotelmanagementsystem.main;
 
+import com.tpe.hotelmanagementsystem.exception.HotelNotFoundException;
+import com.tpe.hotelmanagementsystem.model.Hotel;
 import com.tpe.hotelmanagementsystem.repository.HotelImplementations;
 import com.tpe.hotelmanagementsystem.repository.HotelRepository;
 import com.tpe.hotelmanagementsystem.service.HotelService;
@@ -84,6 +86,26 @@ public class HotelManagementSystemServiceClass {
                 hotelService.findHotelById(Hotelid);
                     break;
                 case 3:
+                    System.out.println("Update a Hotel");
+                    System.out.println("Enter hotel id to update");
+                    Long hotelIdtoUpdate = scanner.nextLong();
+                    scanner.nextLine();
+                    try {
+                        Hotel existHotel = hotelService.findHotelById(hotelIdtoUpdate);
+                        System.out.println("Enter Hotel name to update");
+                        String name = scanner.nextLine();
+
+                        System.out.println("Enter Hotel Location to update");
+                        String location = scanner.nextLine();
+                        Hotel updateHotel = new Hotel();
+                        updateHotel.setId(hotelIdtoUpdate);
+                        updateHotel.setName(name);
+                        updateHotel.setLocation(location);
+                        hotelService.updateHotel(hotelIdtoUpdate, updateHotel);
+
+
+
+                    }catch (HotelNotFoundException e){ System.out.println(e.getMessage());}
 
                     break;
                 case 4:
@@ -92,6 +114,7 @@ public class HotelManagementSystemServiceClass {
                     hotelService.deleteHotel(hotelid);
                     break;
                 case 5:
+                    hotelService.finAllHotel();
                     break;
                 case 6:
                     exit = true;

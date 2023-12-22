@@ -12,4 +12,6 @@ public interface HotelImplementations {
 
    List<Hotel> finAllHotel();
 
+   void updateHotel(Hotel hotel);
+
 }

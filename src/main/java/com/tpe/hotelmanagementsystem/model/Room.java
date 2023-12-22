@@ -1,9 +1,6 @@
 package com.tpe.hotelmanagementsystem.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tbl_rooms")
@@ -15,6 +12,10 @@ public class Room {
     @Column(nullable = false)
     private int number;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "hotel_id", nullable = false)
+    private Hotel hotel;
+
     public Room() {
     }
 
@@ -23,6 +24,8 @@ public class Room {
         this.capacity = capacity;
         this.number = number;
     }
+
+
 
     public Long getId() {
         return id;
@@ -48,12 +51,21 @@ public class Room {
         this.number = number;
     }
 
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
     @Override
     public String toString() {
         return "Room{" +
                 "id=" + id +
                 ", capacity=" + capacity +
                 ", number=" + number +
+                ", hotel=" + hotel +
                 '}';
     }
 }
