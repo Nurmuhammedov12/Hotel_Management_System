@@ -4,8 +4,12 @@ import com.tpe.hotelmanagementsystem.exception.HotelNotFoundException;
 import com.tpe.hotelmanagementsystem.model.Hotel;
 import com.tpe.hotelmanagementsystem.repository.HotelImplementations;
 import com.tpe.hotelmanagementsystem.repository.HotelRepository;
+import com.tpe.hotelmanagementsystem.repository.RoomRepository;
+import com.tpe.hotelmanagementsystem.repository.RoomRepositoryImpl;
 import com.tpe.hotelmanagementsystem.service.HotelService;
 import com.tpe.hotelmanagementsystem.service.HotelServiceImplementations;
+import com.tpe.hotelmanagementsystem.service.RoomService;
+import com.tpe.hotelmanagementsystem.service.RoomServiceImpl;
 
 import java.util.Scanner;
 
@@ -15,6 +19,9 @@ public class HotelManagementSystemServiceClass {
 
    static HotelImplementations hotelRepository = new HotelRepository();
    static HotelServiceImplementations hotelService = new HotelService(hotelRepository);
+
+   static RoomRepository roomRepository = new RoomRepositoryImpl();
+   static RoomService  roomService = new RoomServiceImpl(roomRepository, hotelRepository);
 
     public static void displayHotelManagementSystemMenu(){
         boolean exit = false;
@@ -38,7 +45,7 @@ public class HotelManagementSystemServiceClass {
                     break;
 
                 case 2:
-                    displayRoomOperations();
+                    displayRoomOperations(roomService);
                     break;
                 case 3:
                     displayGuestsOperations();
@@ -127,7 +134,7 @@ public class HotelManagementSystemServiceClass {
         }
 
     }
-    private static void displayRoomOperations(){
+    private static void displayRoomOperations(RoomService roomService){
         boolean exit = false;
         scanner = new Scanner(System.in);
         while(!exit)
@@ -145,7 +152,7 @@ public class HotelManagementSystemServiceClass {
 
             switch (choice) {
                 case 1:
-
+                    roomService.saveRoom();
                     break;
 
                 case 2:

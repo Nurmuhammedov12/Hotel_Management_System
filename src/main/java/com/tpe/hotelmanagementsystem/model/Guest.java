@@ -1,27 +1,26 @@
 package com.tpe.hotelmanagementsystem.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tbl_guests")
 public class Guest {
     @Id
-    private Long id;
-    @Column(nullable = false)
-    private String name;
-    @Column(name = "contact information", nullable = false)
-    private String contact_information;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private Long id;
 
-    public Guest() {
-    }
+    @Column(name = "full_name", nullable = false, length = 25)
+   private String name;
 
-    public Guest(Long id, String name, String contact_information) {
-        this.id = id;
-        this.name = name;
-        this.contact_information = contact_information;
+    @Embedded
+    private Adress adress;
+
+    private LocalDateTime createDate;
+
+    @PrePersist
+    public void prePersist(){
+        createDate = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -40,12 +39,20 @@ public class Guest {
         this.name = name;
     }
 
-    public String getContact_information() {
-        return contact_information;
+    public Adress getAdress() {
+        return adress;
     }
 
-    public void setContact_information(String contact_information) {
-        this.contact_information = contact_information;
+    public void setAdress(Adress adress) {
+        this.adress = adress;
+    }
+
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
     }
 
     @Override
@@ -53,7 +60,8 @@ public class Guest {
         return "Guest{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", contact_information='" + contact_information + '\'' +
+                ", adress=" + adress +
+                ", createDate=" + createDate +
                 '}';
     }
 }

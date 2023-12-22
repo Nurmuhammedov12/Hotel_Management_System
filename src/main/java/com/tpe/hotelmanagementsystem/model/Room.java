@@ -10,7 +10,7 @@ public class Room {
     @Column(nullable = false)
     private int capacity;
     @Column(nullable = false)
-    private int number;
+    private String number;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "hotel_id", nullable = false)
@@ -19,13 +19,12 @@ public class Room {
     public Room() {
     }
 
-    public Room(Long id, int capacity, int number) {
+    public Room(Long id, int capacity, String number, Hotel hotel) {
         this.id = id;
         this.capacity = capacity;
         this.number = number;
+        this.hotel = hotel;
     }
-
-
 
     public Long getId() {
         return id;
@@ -43,11 +42,11 @@ public class Room {
         this.capacity = capacity;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 

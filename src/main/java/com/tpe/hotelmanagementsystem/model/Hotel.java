@@ -19,10 +19,11 @@ public class Hotel {
     public Hotel() {
     }
 
-    public Hotel(Long id, String name, String location) {
+    public Hotel(Long id, String name, String location, List<Room> rooms) {
         this.id = id;
         this.name = name;
         this.location = location;
+        this.rooms = rooms;
     }
 
     public Long getId() {
